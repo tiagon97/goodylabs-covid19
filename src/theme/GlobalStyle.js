@@ -7,6 +7,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
 }
 
 html{
@@ -18,6 +20,9 @@ button,
 input{
     font-size: 1.6rem;
     font-family: 'Montserrat', sans-serif;
+}
+body{
+    margin-top: 80px;
 }
 
 
