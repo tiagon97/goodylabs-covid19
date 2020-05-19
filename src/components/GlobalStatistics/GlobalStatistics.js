@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import format from './../../utils';
+import PropTypes from 'prop-types';
+import format from '../../utils';
 
 const Wrapper = styled.div`
   display: grid;
@@ -12,23 +13,53 @@ const Wrapper = styled.div`
   font-size: 2rem;
 `;
 
+const handleColorGenre = (color) => {
+  switch (color) {
+    case 'primary':
+      return '#DAA520';
+    case 'secondary':
+      return 'red';
+    default:
+      return '#32CD32';
+  }
+};
+
+const StyledSpan = styled.span`
+  color: ${({ color }) => handleColorGenre(color)};
+`;
+
 const GlobalStatistics = ({ globalData }) => {
   return (
     <>
       <h2>Global statistics: </h2>
       <Wrapper>
         <p>
-          COVID-19 cases: <span>{format`${globalData.TotalConfirmed}`}</span>
+          COVID-19 cases:{' '}
+          {globalData.TotalConfirmed ? (
+            <StyledSpan color="primary">{format`${globalData.TotalConfirmed}`}</StyledSpan>
+          ) : (
+            'loading...'
+          )}
         </p>
         <p>
-          Total deaths: <span>{format`${globalData.TotalDeaths}`}</span>
+          Total deaths:{' '}
+          {globalData.TotalConfirmed ? (
+            <StyledSpan color="secondary">{format`${globalData.TotalDeaths}`}</StyledSpan>
+          ) : (
+            'loading...'
+          )}
         </p>
         <p>
-          Total recovered: <span>{format`${globalData.TotalRecovered}`}</span>
+          Total recovered:{' '}
+          {globalData.TotalConfirmed ? <StyledSpan>{format`${globalData.TotalRecovered}`}</StyledSpan> : 'loading...'}
         </p>
       </Wrapper>
     </>
   );
+};
+
+GlobalStatistics.propTypes = {
+  globalData: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default GlobalStatistics;

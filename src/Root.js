@@ -6,25 +6,25 @@ import MapChart from './components/MapChart/MapChart';
 import GlobalStyle from './theme/GlobalStyle';
 import Header from './components/Header/Header';
 import GlobalStatistics from './components/GlobalStatistics/GlobalStatistics';
+import Url from './constants';
 
 const StyledReactTooltip = styled(ReactTooltip)`
   width: 200px;
-  height: 200px;
+  height: 100px;
   border-radius: 1.3rem;
   white-space: pre-wrap;
 `;
 
 const Root = () => {
   const [content, setContent] = useState('');
-  const [countryData, setCountryData] = useState([]);
+  const [countriesData, setCountriesData] = useState([]);
   const [globalData, setGlobalData] = useState({});
   useEffect(() => {
     axios
-      .get('https://api.covid19api.com/summary')
-      .then((res) => {
-        setCountryData(res.data.Countries);
-        setGlobalData(res.data.Global);
-        //console.log(res);
+      .get(Url.summaryUrl)
+      .then((response) => {
+        setCountriesData(response.data.Countries);
+        setGlobalData(response.data.Global);
       })
       .catch((err) => {
         console.log(err);
@@ -35,10 +35,9 @@ const Root = () => {
     <div>
       <Header />
       <GlobalStyle />
-      <MapChart setTooltipContent={setContent} />
+      <MapChart setTooltipContent={setContent} countriesData={countriesData} />
       <StyledReactTooltip>{content}</StyledReactTooltip>
       <GlobalStatistics globalData={globalData} />
-      {console.log(globalData)}
     </div>
   );
 };
