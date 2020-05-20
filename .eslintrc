@@ -8,5 +8,8 @@
       }
     ],
     "no-console": "off"
+  },
+  "globals": {
+    "window": true
   }
 }
