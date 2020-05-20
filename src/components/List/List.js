@@ -6,12 +6,17 @@ const StyledWrapper = styled.ul`
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
-const List = ({ filteredCountries }) => (
+const List = ({ filteredCountries, clearFn }) => (
   <StyledWrapper>
     {filteredCountries.map((item) => {
-      return <ListItem key={item.CountryCode}>{item.Country}</ListItem>;
+      return (
+        <ListItem clearFn={clearFn} key={item.CountryCode}>
+          {item.Country}
+        </ListItem>
+      );
     })}
   </StyledWrapper>
 );

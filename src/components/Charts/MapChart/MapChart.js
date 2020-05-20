@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import PropTypes from 'prop-types';
-import Url from '../../constants';
+import Url from '../../../constants';
 
 const MapChart = ({ setTooltipContent, countriesData }) => (
   <>
-    <ComposableMap height={450} data-tip="" projectionConfig={{ scale: 150 }}>
+    <ComposableMap height={420} data-tip="" projectionConfig={{ scale: 150 }}>
       <Geographies geography={Url.geoUrl}>
         {({ geographies }) =>
           geographies.map((geo) => (
