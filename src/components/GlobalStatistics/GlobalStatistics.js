@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import format from '../../utils';
+import Heading from '../Heading/Heading';
 
 const Wrapper = styled.div`
   display: grid;
@@ -31,7 +32,7 @@ const StyledSpan = styled.span`
 const GlobalStatistics = ({ globalData }) => {
   return (
     <>
-      <h2>Global statistics: </h2>
+      <Heading>Daily global statistics</Heading>
       <Wrapper>
         <p>
           COVID-19 cases:{' '}

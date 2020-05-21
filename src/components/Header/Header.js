@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Heading from '../Heading/Heading';
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -13,13 +14,9 @@ const StyledHeader = styled.header`
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
 `;
 
-const StyledHeading = styled.h1`
-  color: orangered;
-`;
-
 const Header = () => (
   <StyledHeader>
-    <StyledHeading>COVID-19 Live</StyledHeading>
+    <Heading main>COVID-19 Live</Heading>
   </StyledHeader>
 );
 export default Header;
