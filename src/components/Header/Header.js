@@ -16,7 +16,7 @@ const StyledHeader = styled.header`
 
 const Header = () => (
   <StyledHeader>
-    <Heading main>COVID-19 Live</Heading>
+    <Heading main>COVID-19 Info</Heading>
   </StyledHeader>
 );
 export default Header;

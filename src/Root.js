@@ -32,7 +32,7 @@ const Root = () => {
     countryData.Country.toLowerCase().includes(inputValue.toLowerCase()),
   );
 
-  const clearFilterArr = (e) => {
+  const selectCountry = (e) => {
     setInputValue('');
     const countryName = e.target.innerText.split(' ').join('-');
     axios
@@ -71,11 +71,10 @@ const Root = () => {
         <StyledReactTooltip>{content}</StyledReactTooltip>
         <Input value={inputValue} onChange={handleInputChange} name="search" />
         {inputValue.length >= 2 ? (
-          <List value={inputValue} filteredCountries={filterCountries} clearFn={clearFilterArr} />
+          <List value={inputValue} filteredCountries={filterCountries} selectCountry={selectCountry} />
         ) : null}
         {singleCountry.length ? <AreaChart singleCountry={singleCountry} /> : <BarChart globalData={globalData} />}
         <GlobalStatistics globalData={globalData} />
-        {console.log(singleCountry)}
       </Provider>
     </div>
   );

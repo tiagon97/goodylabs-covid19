@@ -11,14 +11,14 @@ const SimpleBarChart = ({ globalData }) => {
 
   return (
     <>
-      <Heading>Global</Heading>
+      <Heading>Global stats</Heading>
       <ResponsiveContainer width="100%" height={600}>
         <BarChart data={data} margin={{ top: 60, right: 80, left: 80, bottom: 60 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
-          <Tooltip />
-          <Bar dataKey="amount" fill="violet">
+          <Tooltip cursor={{ fill: 'none' }} />
+          <Bar barSize={250} dataKey="amount" fill="violet">
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={data[index].color} />
             ))}

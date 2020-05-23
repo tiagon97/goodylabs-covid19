@@ -9,11 +9,11 @@ const StyledWrapper = styled.ul`
   justify-content: center;
 `;
 
-const List = ({ filteredCountries, clearFn }) => (
+const List = ({ filteredCountries, selectCountry }) => (
   <StyledWrapper>
     {filteredCountries.map((item) => {
       return (
-        <ListItem clearFn={clearFn} key={item.CountryCode}>
+        <ListItem selectCountry={selectCountry} key={item.CountryCode}>
           {item.Country}
         </ListItem>
       );

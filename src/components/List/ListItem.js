@@ -16,9 +16,9 @@ const StyledItem = styled.li`
     color: white;
     cursor: pointer;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 3px;
   }
 `;
 
-const ListItem = ({ children, clearFn }) => <StyledItem onClick={clearFn}>{children}</StyledItem>;
+const ListItem = ({ children, selectCountry }) => <StyledItem onClick={selectCountry}>{children}</StyledItem>;
 export default ListItem;
