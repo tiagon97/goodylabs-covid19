@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledHeader = styled.header`
+const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   left: 0;
@@ -11,3 +11,5 @@ export const StyledHeader = styled.header`
   text-align: center;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
 `;
+
+export default StyledHeader;

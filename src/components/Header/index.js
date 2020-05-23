@@ -2,7 +2,7 @@ import React from 'react';
 
 import Heading from '../Heading';
 import messages from './messages';
-import { StyledHeader } from './styled';
+import StyledHeader from './styled';
 
 const Header = () => (
   <StyledHeader>

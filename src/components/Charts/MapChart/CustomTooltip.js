@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Header, TooltipContainer, DataContainer, ValuesContainer } from './styled';
-import { messages } from './messages';
+import messages from './messages';
 import formatValue from '../../../utils';
 import { StyledSpan } from '../../GlobalStatistics/styled';
 
@@ -24,8 +24,8 @@ const CustomTooltip = ({ header, data }) => (
 );
 
 CustomTooltip.propTypes = {
-  header: PropTypes.string,
-  data: PropTypes.object,
+  header: PropTypes.string.isRequired,
+  data: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 export default CustomTooltip;
