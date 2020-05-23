@@ -1,13 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import ListItem from './ListItem';
 
-const StyledWrapper = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
+import ListItem from './ListItem';
+import { StyledWrapper } from './styled';
 
 const List = ({ filteredCountries, selectCountry }) => (
   <StyledWrapper>

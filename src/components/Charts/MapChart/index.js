@@ -1,10 +1,14 @@
-import React, { memo } from 'react';
+import React, { memo, Fragment } from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import PropTypes from 'prop-types';
-import Url from '../../../constants';
+
+import { Url } from '../../../constants';
+import { Colors } from '../../../constants';
+import { messages } from './messages';
+import CustomTooltip from './CustomTooltip';
 
 const MapChart = ({ setTooltipContent, countriesData }) => (
-  <>
+  <Fragment>
     <ComposableMap height={420} data-tip="" projectionConfig={{ scale: 150 }}>
       <Geographies geography={Url.geoUrl}>
         {({ geographies }) =>
@@ -16,10 +20,18 @@ const MapChart = ({ setTooltipContent, countriesData }) => (
                 const { NAME, ISO_A2 } = geo.properties;
                 const result = countriesData.filter((country) => country.CountryCode === ISO_A2);
                 if (!result.length) {
-                  setTooltipContent(`${NAME}\nno data available`);
+                  setTooltipContent(<CustomTooltip header={NAME} />);
                 } else {
-                  const MultiLineString = `Total cases: ${result[0].TotalConfirmed}\nTotal deaths: ${result[0].TotalDeaths}\nTotal recovered: ${result[0].TotalRecovered}`;
-                  setTooltipContent(`${NAME}\n${MultiLineString} `);
+                  setTooltipContent(
+                    <CustomTooltip
+                      header={NAME}
+                      data={{
+                        totalConfirmed: result[0].TotalConfirmed,
+                        totalDeaths: result[0].TotalDeaths,
+                        totalRecovered: result[0].TotalRecovered,
+                      }}
+                    />,
+                  );
                 }
               }}
               onMouseLeave={() => {
@@ -27,15 +39,15 @@ const MapChart = ({ setTooltipContent, countriesData }) => (
               }}
               style={{
                 default: {
-                  fill: '#D6D6DA',
+                  fill: Colors.default,
                   outline: 'none',
                 },
                 hover: {
-                  fill: '#F53',
+                  fill: Colors.hover,
                   outline: 'none',
                 },
                 pressed: {
-                  fill: '#E42',
+                  fill: Colors.pressed,
                   outline: 'none',
                 },
               }}
@@ -44,15 +56,16 @@ const MapChart = ({ setTooltipContent, countriesData }) => (
         }
       </Geographies>
     </ComposableMap>
-  </>
+  </Fragment>
 );
+
 MapChart.propTypes = {
   setTooltipContent: PropTypes.func,
-  countriesData: PropTypes.instanceOf(Array).isRequired,
+  countriesData: PropTypes.array.isRequired,
 };
 
 MapChart.defaultProps = {
-  setTooltipContent: () => 'no data',
+  setTooltipContent: () => messages.noData,
 };
 
 export default memo(MapChart);

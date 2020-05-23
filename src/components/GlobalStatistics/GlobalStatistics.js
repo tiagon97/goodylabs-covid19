@@ -1,66 +1,51 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+import Heading from '../Heading';
 import format from '../../utils';
-import Heading from '../Heading/Heading';
+import messages from './messages';
+import { Wrapper, StyledSpan, Tile, Title, Data } from './styled';
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  background-color: #eee;
-  text-align: center;
-  padding: 40px 0;
-  font-weight: 600;
-  font-size: 2rem;
-`;
-
-const handleColorGenre = (color) => {
-  switch (color) {
-    case 'primary':
-      return '#DAA520';
-    case 'secondary':
-      return 'red';
-    default:
-      return '#32CD32';
-  }
-};
-
-const StyledSpan = styled.span`
-  color: ${({ color }) => handleColorGenre(color)};
-`;
-
-const GlobalStatistics = ({ globalData }) => {
-  return (
-    <>
-      <Heading>Daily global statistics</Heading>
-      <Wrapper>
-        <p>
-          COVID-19 cases:{' '}
+const GlobalStatistics = ({ globalData }) => (
+  <>
+    <Heading>{messages.header}</Heading>
+    <Wrapper>
+      <Tile>
+        <Title>{messages.cases}</Title>
+        <Data>
           {globalData.TotalConfirmed ? (
             <StyledSpan color="primary">{format`${globalData.TotalConfirmed}`}</StyledSpan>
           ) : (
-            'loading...'
+            messages.loading
           )}
-        </p>
-        <p>
-          Total deaths:{' '}
+        </Data>
+      </Tile>
+      <Tile>
+        <Title>{messages.deaths}</Title>
+        <Data>
           {globalData.TotalConfirmed ? (
             <StyledSpan color="secondary">{format`${globalData.TotalDeaths}`}</StyledSpan>
           ) : (
-            'loading...'
+            messages.loading
           )}
-        </p>
-        <p>
-          Total recovered:{' '}
-          {globalData.TotalConfirmed ? <StyledSpan>{format`${globalData.TotalRecovered}`}</StyledSpan> : 'loading...'}
-        </p>
-      </Wrapper>
-    </>
-  );
-};
+        </Data>
+      </Tile>
+      <Tile>
+        <Data>
+          <Title>{messages.recovered}</Title>
+          {globalData.TotalConfirmed ? (
+            <StyledSpan>{format`${globalData.TotalRecovered}`}</StyledSpan>
+          ) : (
+            messages.loading
+          )}
+        </Data>
+      </Tile>
+    </Wrapper>
+  </>
+);
 
 GlobalStatistics.propTypes = {
-  globalData: PropTypes.instanceOf(Object).isRequired,
+  globalData: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 export default GlobalStatistics;

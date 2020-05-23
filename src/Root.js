@@ -1,25 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Provider } from 'react-redux';
-import ReactTooltip from 'react-tooltip';
-import styled from 'styled-components';
 import axios from 'axios';
-import store from './store/store';
-import MapChart from './components/Charts/MapChart/MapChart';
-import GlobalStyle from './theme/GlobalStyle';
-import Header from './components/Header/Header';
-import GlobalStatistics from './components/GlobalStatistics/GlobalStatistics';
-import Url from './constants';
-import AreaChart from './components/Charts/AreaChart/AreaChart';
-import BarChart from './components/Charts/BarChart/BarChart';
-import Input from './components/Input/Input';
-import List from './components/List/List';
+import { Provider } from 'react-redux';
 
-const StyledReactTooltip = styled(ReactTooltip)`
-  width: 200px;
-  height: 100px;
-  border-radius: 1.3rem;
-  white-space: pre-wrap;
-`;
+import GlobalStatistics from './components/GlobalStatistics/GlobalStatistics';
+import GlobalStyle from './theme/GlobalStyle';
+import Header from './components/Header';
+import Input from './components/Input';
+import List from './components/List';
+import { Url } from './constants';
+import store from './store/store';
+import { AreaChart, BarChart, MapChart } from './components/Charts';
+import { StyledReactTooltip } from './RootStyled';
 
 const Root = () => {
   const [content, setContent] = useState('');
@@ -63,20 +54,20 @@ const Root = () => {
   }, []);
 
   return (
-    <div>
-      <Provider store={store}>
-        <GlobalStyle />
-        <Header />
-        <MapChart setTooltipContent={setContent} countriesData={countriesData} />
-        <StyledReactTooltip>{content}</StyledReactTooltip>
-        <Input value={inputValue} onChange={handleInputChange} name="search" />
-        {inputValue.length >= 2 ? (
-          <List value={inputValue} filteredCountries={filterCountries} selectCountry={selectCountry} />
-        ) : null}
-        {singleCountry.length ? <AreaChart singleCountry={singleCountry} /> : <BarChart globalData={globalData} />}
-        <GlobalStatistics globalData={globalData} />
-      </Provider>
-    </div>
+    <Provider store={store}>
+      <GlobalStyle />
+      <Header />
+      <MapChart setTooltipContent={setContent} countriesData={countriesData} />
+      <StyledReactTooltip>{content}</StyledReactTooltip>
+      <Input value={inputValue} onChange={handleInputChange} name="search" />
+      {inputValue.length >= 2 ? (
+        <List value={inputValue} filteredCountries={filterCountries} selectCountry={selectCountry} />
+      ) : null}
+      {singleCountry.length ? <AreaChart singleCountry={singleCountry} /> : <BarChart globalData={globalData} />}
+      <GlobalStatistics globalData={globalData} />
+      {console.log(globalData)}
+    </Provider>
   );
 };
+
 export default Root;
