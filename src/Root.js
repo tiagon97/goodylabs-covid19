@@ -1,36 +1,66 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { Provider } from 'react-redux';
 
 import GlobalStatistics from './components/GlobalStatistics';
 import GlobalStyle from './theme/GlobalStyle';
 import Header from './components/Header';
 import Input from './components/Input';
 import List from './components/List';
+import Modal from './components/Modal';
 import StyledReactTooltip from './RootStyled';
-import store from './store/store';
 import { AreaChart, BarChart, MapChart } from './components/Charts';
 import { Url } from './constants';
 
 const Root = () => {
   const [content, setContent] = useState('');
-  const [countriesData, setCountriesData] = useState([]);
-  const [globalData, setGlobalData] = useState({});
   const [inputValue, setInputValue] = useState('');
-  const [singleCountry, setSingleCountry] = useState([]);
+  const [error, setError] = useState({
+    errorMessage: '',
+    value: false,
+  });
 
-  const filterCountries = countriesData.filter((countryData) =>
-    countryData.Country.toLowerCase().includes(inputValue.toLowerCase()),
+  const Global = useSelector(({ globalData }) => globalData);
+  const Countries = useSelector(({ countriesData }) => countriesData);
+  const SingleCountry = useSelector(({ singleCountryData }) => singleCountryData);
+  const dispatch = useDispatch();
+
+  const filterCountries = Countries.filter((country) =>
+    country.Country.toLowerCase().includes(inputValue.toLowerCase()),
   );
+
+  function getData() {
+    return (dispatch) => {
+      axios
+        .get(Url.summaryUrl)
+        .then(({ data }) =>
+          dispatch({
+            type: 'FETCH_COUNTRIES_DATA',
+            payload: data,
+          }),
+        )
+        .catch((err) => {
+          console.log(err);
+          setError({ errorMessage: err, value: true });
+        });
+    };
+  }
+
+  useEffect(() => {
+    dispatch(getData());
+  }, [dispatch]);
 
   const selectCountry = (e) => {
     setInputValue('');
     const countryName = e.target.innerText.split(' ').join('-');
     axios
       .get(`${Url.country}${countryName}`)
-      .then((response) => {
-        const newResponse = response.data.slice(Math.max(response.data.length - 30, 1));
-        setSingleCountry(newResponse);
+      .then(({ data }) => {
+        const newResponse = data.slice(Math.max(data.length - 30, 1));
+        dispatch({
+          type: 'FETCH_SINGLE_COUNTRY',
+          payload: newResponse,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -41,31 +71,21 @@ const Root = () => {
     setInputValue(e.target.value);
   };
 
-  useEffect(() => {
-    axios
-      .get(Url.summaryUrl)
-      .then((response) => {
-        setCountriesData(response.data.Countries);
-        setGlobalData(response.data.Global);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   return (
-    <Provider store={store}>
+    <>
+      {console.log(error.errorMessage)}
+      {error.value === true ? <Modal error={error.errorMessage} /> : null}
       <GlobalStyle />
       <Header />
-      <MapChart setTooltipContent={setContent} countriesData={countriesData} />
+      <MapChart setTooltipContent={setContent} countriesData={Countries} />
       <StyledReactTooltip>{content}</StyledReactTooltip>
       <Input value={inputValue} onChange={handleInputChange} name="search" />
       {inputValue.length >= 2 ? (
         <List value={inputValue} filteredCountries={filterCountries} selectCountry={selectCountry} />
       ) : null}
-      {singleCountry.length ? <AreaChart singleCountry={singleCountry} /> : <BarChart globalData={globalData} />}
-      <GlobalStatistics globalData={globalData} />
-    </Provider>
+      {SingleCountry.length ? <AreaChart singleCountry={SingleCountry} /> : <BarChart globalData={Global} />}
+      <GlobalStatistics globalData={Global} />
+    </>
   );
 };
 

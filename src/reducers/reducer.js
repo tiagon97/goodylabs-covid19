@@ -1,27 +1,26 @@
 const initState = {
-  countries: [
-    {
-      country: 'England',
-      cases: '23000',
-      deaths: '1293',
-      recovered: '2333',
-    },
-  ],
-  global: [
-    {
-      totalDeaths: '1244',
-    },
-  ],
+  globalData: {},
+  countriesData: [],
+  singleCountryData: [],
 };
 
 const rootReducer = (state = initState, { type, payload }) => {
-  if (type === 'ADD_COUNTRY') {
-    return {
-      countries: [...state.countries, payload],
-      global: state.global,
-    };
+  switch (type) {
+    case 'FETCH_COUNTRIES_DATA':
+      return {
+        ...state,
+        globalData: payload.Global,
+        countriesData: payload.Countries,
+      };
+
+    case 'FETCH_SINGLE_COUNTRY':
+      return {
+        ...state,
+        singleCountryData: payload,
+      };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default rootReducer;

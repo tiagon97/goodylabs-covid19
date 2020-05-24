@@ -27,12 +27,12 @@ const BarChart = ({ globalData }) => {
     <>
       <Heading>{messages.heading}</Heading>
       <ResponsiveContainer width="100%" height={600}>
-        <RechartsBarChart data={data} margin={{ top: 60, right: 80, left: 80, bottom: 60 }}>
+        <RechartsBarChart data={data} margin={{ top: 60, right: 10, left: 10, bottom: 60 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip cursor={{ fill: 'none' }} formatter={(value) => formatValue`${value}`} />
-          <Bar barSize={250} dataKey="amount" fill="violet">
+          <Bar barSize={250} dataKey="amount" fill="royalblue">
             {data.map((_entry, index) => (
               <Cell key={`cell-${_entry}`} fill={data[index].color} />
             ))}

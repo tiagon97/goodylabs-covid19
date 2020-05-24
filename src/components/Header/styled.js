@@ -10,6 +10,7 @@ const StyledHeader = styled.header`
   background-color: white;
   text-align: center;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
+  z-index: 998;
 `;
 
 export default StyledHeader;

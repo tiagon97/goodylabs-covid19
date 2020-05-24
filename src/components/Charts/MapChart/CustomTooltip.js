@@ -29,7 +29,7 @@ CustomTooltip.propTypes = {
 };
 
 CustomTooltip.defaultProps = {
-  data: false,
+  data: null,
 };
 
 export default CustomTooltip;
