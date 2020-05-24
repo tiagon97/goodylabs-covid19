@@ -19,6 +19,6 @@ const List = ({ filteredCountries, selectCountry }) => (
 export default List;
 
 List.propTypes = {
-  filteredCountries: PropTypes.arrayOf(PropTypes.string).isRequired,
+  filteredCountries: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectCountry: PropTypes.func.isRequired,
 };

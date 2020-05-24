@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Heading from '../Heading';
+import CircleSpinner from '../CircleSpinner';
 import format from '../../utils';
 import messages from './messages';
 import { Wrapper, StyledSpan, Tile, Title, Data } from './styled';
@@ -16,27 +17,27 @@ const GlobalStatistics = ({ globalData }) => (
           {globalData.TotalConfirmed ? (
             <StyledSpan color="primary">{format`${globalData.TotalConfirmed}`}</StyledSpan>
           ) : (
-            messages.loading
+            <CircleSpinner />
           )}
         </Data>
       </Tile>
       <Tile>
         <Title>{messages.deaths}</Title>
         <Data>
-          {globalData.TotalConfirmed ? (
+          {globalData.TotalDeaths ? (
             <StyledSpan color="secondary">{format`${globalData.TotalDeaths}`}</StyledSpan>
           ) : (
-            messages.loading
+            <CircleSpinner />
           )}
         </Data>
       </Tile>
       <Tile>
         <Data>
           <Title>{messages.recovered}</Title>
-          {globalData.TotalConfirmed ? (
+          {globalData.TotalRecovered ? (
             <StyledSpan>{format`${globalData.TotalRecovered}`}</StyledSpan>
           ) : (
-            messages.loading
+            <CircleSpinner />
           )}
         </Data>
       </Tile>

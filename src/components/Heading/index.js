@@ -5,13 +5,12 @@ import StyledHeading from './styled';
 
 const Heading = ({ children, main }) => <StyledHeading main={main}>{children}</StyledHeading>;
 
-export default Heading;
-
 Heading.propTypes = {
   children: PropTypes.string.isRequired,
-  main: PropTypes.string,
+  main: PropTypes.bool,
 };
 
 Heading.defaultProps = {
-  main: '',
+  main: false,
 };
+export default Heading;

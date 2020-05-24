@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts';
+
 import Heading from '../../Heading';
 import formatValue from '../../../utils';
 import messages from './messages';

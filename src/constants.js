@@ -8,8 +8,9 @@ export const Colors = {
   red: 'red',
   yellow: '#DAA520',
   green: '#32CD32',
-  white: 'white',
+  white: '#ffffff',
   default: '#D6D6DA',
   hover: '#F53',
   pressed: '#E42',
+  black: 'black',
 };

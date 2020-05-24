@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import PropTypes from 'prop-types';
 
-import { Colors, Url } from '../../../constants';
-import messages from './messages';
 import CustomTooltip from './CustomTooltip';
+import messages from './messages';
+import { Colors, Url } from '../../../constants';
 
 const MapChart = ({ setTooltipContent, countriesData }) => (
   <>
@@ -60,7 +60,7 @@ const MapChart = ({ setTooltipContent, countriesData }) => (
 
 MapChart.propTypes = {
   setTooltipContent: PropTypes.func,
-  countriesData: PropTypes.arrayOf(PropTypes.number).isRequired,
+  countriesData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 MapChart.defaultProps = {

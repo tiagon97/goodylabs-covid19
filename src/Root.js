@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 
-import GlobalStatistics from './components/GlobalStatistics/GlobalStatistics';
+import GlobalStatistics from './components/GlobalStatistics';
 import GlobalStyle from './theme/GlobalStyle';
 import Header from './components/Header';
 import Input from './components/Input';
 import List from './components/List';
 import StyledReactTooltip from './RootStyled';
-import { Url } from './constants';
 import store from './store/store';
 import { AreaChart, BarChart, MapChart } from './components/Charts';
+import { Url } from './constants';
 
 const Root = () => {
   const [content, setContent] = useState('');

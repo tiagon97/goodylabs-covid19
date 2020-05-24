@@ -30,6 +30,7 @@ export const StyledSpan = styled.span`
 export const Tile = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 export const Title = styled.span`
