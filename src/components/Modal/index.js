@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Heading from '../Heading/index';
 import messages from './messages';
+import refreshIcon from '../../assets/refresh.svg';
 import { StyledOverlayWrapper, StyledParagraph, StyledButton, StyledModal } from './styled';
 
 const Modal = ({ error }) => (
@@ -9,8 +10,8 @@ const Modal = ({ error }) => (
     <StyledModal>
       <Heading main>{messages.error}</Heading>
       <StyledParagraph>{messages.statement}</StyledParagraph>
-      <StyledParagraph>{error.message}</StyledParagraph>
-      <StyledButton onClick={() => window.location.reload()} />
+      <StyledParagraph>{error}</StyledParagraph>
+      <StyledButton src={refreshIcon} onClick={() => window.location.reload()} />
     </StyledModal>
   </StyledOverlayWrapper>
 );

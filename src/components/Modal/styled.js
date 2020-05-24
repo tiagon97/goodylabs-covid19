@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import refreshIcon from '../../assets/refresh.svg';
 
 export const StyledModal = styled.div`
   position: fixed;
@@ -31,18 +30,12 @@ export const StyledParagraph = styled.p`
   margin: 20px;
 `;
 
-export const StyledButton = styled.div`
+export const StyledButton = styled.img`
   position: absolute;
   bottom: 6%;
   right: 3%;
-  width: 60px;
-  height: 60px;
-  background-image: url(${refreshIcon});
-  background-size: 35px;
-  background-position: 15px 50%;
-  background-repeat: no-repeat;
-  outline: none;
-
+  width: 40px;
+  height: 40px;
   &:hover {
     cursor: pointer;
   }

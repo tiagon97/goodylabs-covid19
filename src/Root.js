@@ -15,10 +15,7 @@ import { Url } from './constants';
 const Root = () => {
   const [content, setContent] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [error, setError] = useState({
-    errorMessage: '',
-    value: false,
-  });
+  const [error, setError] = useState('');
 
   const Global = useSelector(({ globalData }) => globalData);
   const Countries = useSelector(({ countriesData }) => countriesData);
@@ -41,7 +38,7 @@ const Root = () => {
         )
         .catch((err) => {
           console.log(err);
-          setError({ errorMessage: err, value: true });
+          setError(err.message);
         });
     };
   }
@@ -64,6 +61,7 @@ const Root = () => {
       })
       .catch((err) => {
         console.log(err);
+        setError(err.message);
       });
   };
 
@@ -73,16 +71,15 @@ const Root = () => {
 
   return (
     <>
-      {console.log(error.errorMessage)}
-      {error.value === true ? <Modal error={error.errorMessage} /> : null}
+      {error && <Modal error={error} />}
       <GlobalStyle />
       <Header />
       <MapChart setTooltipContent={setContent} countriesData={Countries} />
       <StyledReactTooltip>{content}</StyledReactTooltip>
       <Input value={inputValue} onChange={handleInputChange} name="search" />
-      {inputValue.length >= 2 ? (
+      {inputValue.length >= 2 && (
         <List value={inputValue} filteredCountries={filterCountries} selectCountry={selectCountry} />
-      ) : null}
+      )}
       {SingleCountry.length ? <AreaChart singleCountry={SingleCountry} /> : <BarChart globalData={Global} />}
       <GlobalStatistics globalData={Global} />
     </>
