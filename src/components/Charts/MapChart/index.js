@@ -60,7 +60,7 @@ const MapChart = ({ setTooltipContent, countriesData }) => (
 
 MapChart.propTypes = {
   setTooltipContent: PropTypes.func,
-  countriesData: PropTypes.arrayOf(PropTypes.number).isRequired,
+  countriesData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 MapChart.defaultProps = {

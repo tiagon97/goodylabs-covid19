@@ -43,7 +43,7 @@ const AreaChart = ({ singleCountry }) => (
 );
 
 AreaChart.propTypes = {
-  singleCountry: PropTypes.arrayOf(PropTypes.number),
+  singleCountry: PropTypes.arrayOf(PropTypes.object),
 };
 
 AreaChart.defaultProps = {

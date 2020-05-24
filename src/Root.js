@@ -65,7 +65,6 @@ const Root = () => {
       ) : null}
       {singleCountry.length ? <AreaChart singleCountry={singleCountry} /> : <BarChart globalData={globalData} />}
       <GlobalStatistics globalData={globalData} />
-      {console.log(globalData)}
     </Provider>
   );
 };

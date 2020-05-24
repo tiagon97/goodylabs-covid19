@@ -9,9 +9,9 @@ export default Heading;
 
 Heading.propTypes = {
   children: PropTypes.string.isRequired,
-  main: PropTypes.string,
+  main: PropTypes.bool,
 };
 
 Heading.defaultProps = {
-  main: '',
+  main: false,
 };

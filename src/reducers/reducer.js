@@ -21,6 +21,7 @@ const rootReducer = (state = initState, { type, payload }) => {
       global: state.global,
     };
   }
+  return state;
 };
 
 export default rootReducer;

@@ -25,7 +25,11 @@ const CustomTooltip = ({ header, data }) => (
 
 CustomTooltip.propTypes = {
   header: PropTypes.string.isRequired,
-  data: PropTypes.objectOf(PropTypes.number).isRequired,
+  data: PropTypes.objectOf(PropTypes.number),
+};
+
+CustomTooltip.defaultProps = {
+  data: false,
 };
 
 export default CustomTooltip;
