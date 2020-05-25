@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Live demo: [https://eager-poitras-7a96b3.netlify.app/](https://eager-poitras-7a96b3.netlify.app/)
+
 ## Installation and Setup Instructions
 
 #### Example:
